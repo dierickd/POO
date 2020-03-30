@@ -1,15 +1,14 @@
 <?php
 
+require_once 'Vehicle.php';
 require_once 'Bicycle.php';
 require_once 'Car.php';
+require_once 'Truck.php';
 
+$truck = new Truck('purple', 2, 15, 'fuel');
+$truck->setLoading(10);
+$capacity = $truck->getEmptyOrFull();
 
-$car = new Car('blue', 4, 'gazol');
-$car->isStart();
-$car->setStart(true);
+echo $capacity;
 
-$car->forward();
-$stop = $car->brake();
-echo $stop;
-
-var_dump($car);
+var_dump($truck);
