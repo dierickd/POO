@@ -1,7 +1,7 @@
 <?php
+require_once 'Vehicle.php';
 
-
-class Bicycle extends NotEnergy
+class NotEnergy extends Vehicle
 {
 
    /**

@@ -1,11 +1,11 @@
 <?php
 
 
-class Bicycle extends NotEnergy
+class Tractor extends Agricultural
 {
 
    /**
-    * Bicycle constructor.
+    * Tractor constructor.
     * @param string      $color
     * @param int         $nbSeats
     * @param string|null $energy

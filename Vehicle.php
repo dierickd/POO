@@ -4,179 +4,154 @@
 
 class Vehicle
 {
-    const ALLOWED_ENERGIES = [
-        'fuel',
-        'electric',
-    ];
-    /**
-     * @var integer
-     */
-    protected $loading = 0;
-    /**
-     * @var integer
-     */
-    protected $stock;
-    /**
-     * @var string
-     */
-    protected $energy;
-    /**
-     * @var string
-     */
-    protected $color;
+   public const ALLOWED_ENERGIES = [
+      'fuel',
+      'electric',
+      'diesel',
+   ];
+   private $loading = 0;
+   private $stock;
+   protected $energy;
+   private $color;
+   private $currentSpeed;
+   private $nbSeats;
+   private $nbWheels;
 
-    /**
-     * @var integer
-     */
-    protected $currentSpeed;
+   /**
+    * Vehicle constructor.
+    * @param string $color
+    * @param int    $nbSeats
+    * @param string $energy
+    */
+   public function __construct(string $color, int $nbSeats, string $energy = null)
+   {
+      $this->color = $color;
+      $this->nbSeats = $nbSeats;
+      $this->energy = $energy;
+   }
 
-    /**
-     * @var integer
-     */
-    protected $nbSeats;
+   public function forward(): string
+   {
+      $this->currentSpeed = 15;
+      return "Go !";
+   }
 
-    /**
-     * @var integer
-     */
-    private $nbWheels;
+   public function brake(): string
+   {
+      $sentence = "";
+      while ($this->currentSpeed > 0) {
+         $this->currentSpeed--;
+         $sentence .= "Brake !!!";
+      }
 
-    /**
-     * Vehicle constructor.
-     * @param string $color
-     * @param int $nbSeats
-     * @param int $stock
-     * @param string $energy
-     */
-    public function __construct(string $color, int $nbSeats, int $stock, string $energy)
-    {
-        $this->color = $color;
-        $this->nbSeats = $nbSeats;
-        $this->stock = $stock;
-        $this->energy = $energy;
-    }
+      $sentence .= "I'm stopped !";
+      return $sentence;
+   }
 
-    public function forward(): string
-    {
-        $this->currentSpeed = 15;
-        return "Go !";
-    }
+   public function getCurrentSpeed(): int
+   {
+      return $this->currentSpeed;
+   }
 
-    public function brake(): string
-    {
-        $sentence = "";
-        while ($this->currentSpeed > 0) {
-            $this->currentSpeed--;
-            $sentence .= "Brake !!!";
-        }
+   public function setCurrentSpeed(int $currentSpeed): void
+   {
+      if ($currentSpeed >= 0) {
+         $this->currentSpeed = $currentSpeed;
+      }
+   }
 
-        $sentence .= "I'm stopped !";
-        return $sentence;
-    }
+   public function getColor(): string
+   {
+      return $this->color;
+   }
 
-    public function getCurrentSpeed(): int
-    {
-        return $this->currentSpeed;
-    }
+   public function setColor(string $color): void
+   {
+      $this->color = $color;
+   }
 
-    public function setCurrentSpeed(int $currentSpeed): void
-    {
-        if($currentSpeed >= 0){
-            $this->currentSpeed = $currentSpeed;
-        }
-    }
+   public function getNbSeats(): int
+   {
+      return $this->nbSeats;
+   }
 
-    public function getColor(): string
-    {
-        return $this->color;
-    }
+   public function setNbSeats(int $nbSeats): void
+   {
+      $this->nbSeats = $nbSeats;
+   }
 
-    public function setColor(string $color): void
-    {
-        $this->color = $color;
-    }
+   public function getNbWheels(): int
+   {
+      return $this->nbWheels;
+   }
 
-    public function getNbSeats(): int
-    {
-        return $this->nbSeats;
-    }
+   public function setNbWheels(int $nbWheels): void
+   {
+      $this->nbWheels = $nbWheels;
+   }
 
-    public function setNbSeats(int $nbSeats): void
-    {
-        $this->nbSeats = $nbSeats;
-    }
+   /**
+    * @return float
+    */
+   public function getStock(): float
+   {
+      return $this->stock;
+   }
 
-    public function getNbWheels(): int
-    {
-        return $this->nbWheels;
-    }
+   /**
+    * @param int $stock
+    */
+   public function setStock(int $stock): void
+   {
+      $this->stock = $stock;
+   }
 
-    public function setNbWheels(int $nbWheels): void
-    {
-        $this->nbWheels = $nbWheels;
-    }
+   /**
+    * @return int
+    */
+   public function getLoading(): int
+   {
+      return $this->loading;
+   }
 
-    /**
-     * @return float
-     */
-    public function getStock(): float
-    {
-        return $this->stock;
-    }
+   /**
+    * @param int $loading
+    */
+   public function setLoading(int $loading): void
+   {
+      if ($loading > $this->getStock()) {
+         $this->loading = $this->getStock();
+      } else {
+         $this->loading = $loading;
+      }
+   }
 
-    /**
-     * @param float $stock
-     */
-    public function setStock(float $stock): void
-    {
-        $this->stock = $stock;
-    }
+   /**
+    * @return string
+    */
+   public function getEnergy(): string
+   {
+      return $this->energy;
+   }
 
-    /**
-     * @return int
-     */
-    public function getLoading(): int
-    {
-        return $this->loading;
-    }
+   /**
+    * @param mixed $energy
+    * @return void
+    */
+   public function setEnergy(string $energy): void
+   {
+      if (in_array($energy, self::ALLOWED_ENERGIES)) {
+         $this->energy = $energy;
+      }
+   }
 
-    /**
-     * @param int $loading
-     */
-    public function setLoading(int $loading): void
-    {
-        if ($loading > $this->getStock()) {
-            $this->loading = $this->getStock();
-        } else {
-            $this->loading = $loading;
-        }
-    }
-
-    /**
-     * @return string
-     */
-    protected function getEnergy(): string
-    {
-        return $this->energy;
-    }
-
-    /**
-     * @param mixed $energy
-     * @return void
-     */
-    protected function setEnergy(string $energy):void
-    {
-        if (in_array($energy, self::ALLOWED_ENERGIES)) {
-            $this->energy = $energy;
-        }
-    }
-
-    public function getEmptyOrFull() :string
-    {
-        if ($this->getLoading() == $this->getStock()) {
-            return 'Full';
-        } else {
-            return 'in filling';
-        }
-    }
+   public function getEmptyOrFull(): string
+   {
+      if ($this->getLoading() == $this->getStock()) {
+         return 'Full';
+      } else {
+         return 'in filling';
+      }
+   }
 
 }
