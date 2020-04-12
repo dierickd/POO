@@ -29,7 +29,7 @@ $volvo->setParkBrake(true);
 try {
    echo $volvo->start();
 } catch (Exception $e) {
-   $volvo->setParkBrake(true);
+   $volvo->setParkBrake(false);
 } finally {
    echo "Ma voiture roule comme un donut";
 }

@@ -4,7 +4,7 @@ require_once 'Vehicle.php';
 class Car extends Vehicle
 {
 
-   private $hasParkBrake = false;
+   private $hasParkBrake = true;
 
    /**
     * Car constructor.
