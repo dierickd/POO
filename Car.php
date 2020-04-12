@@ -24,7 +24,7 @@ class Car extends Vehicle
    public function start(): ?string
    {
       if ($this->hasParkBrake) {
-         throw new Exception("Le frein à main est actif !");
+         throw new Exception();
       } else {
          return "Le véhicule à démarré !";
       }
