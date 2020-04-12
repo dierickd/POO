@@ -4,6 +4,8 @@ require_once 'Vehicle.php';
 class Car extends Vehicle
 {
 
+   private $hasParkBrake = false;
+
    /**
     * Car constructor.
     * @param string $color
@@ -16,6 +18,19 @@ class Car extends Vehicle
    }
 
    /**
+    * @return string|null
+    * @throws Exception
+    */
+   public function start(): ?string
+   {
+      if ($this->hasParkBrake) {
+         throw new Exception("Le frein à main est actif !");
+      } else {
+         return "Le véhicule à démarré !";
+      }
+   }
+
+   /**
     * @param mixed $energy
     * @return void
     */
@@ -24,5 +39,13 @@ class Car extends Vehicle
       if (in_array($energy, self::ALLOWED_ENERGIES, true)) {
          $this->energy = $energy;
       }
+   }
+
+   /**
+    * @param mixed $hasParkBrake
+    */
+   public function setParkBrake($hasParkBrake)
+   {
+      $this->hasParkBrake = $hasParkBrake;
    }
 }

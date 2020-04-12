@@ -24,18 +24,12 @@ require_once 'ResidentialWay.php';
 // Ces trois famille ont à leurs tour divers véhicules associés, je n'ai fais qu'un véhicule par famille pour l'exercice
 
 
-$volvo = new Truck('red', 4, 'fuel');
-$road = new MotorWay();
-$road->addVehicle($volvo);
-
-$bike = new NotEnergy('yellow', 1);
-$road2 = new MotorWay();
-$road2->addVehicle($bike);
-
-$tractor = new Agricultural('brown', 1, 'fuel');
-$road3 = new ResidentialWay();
-$road3->addVehicle($tractor);
-
-var_dump($road->getCurrentVehicles());
-var_dump($road2->getCurrentVehicles());
-var_dump($road3->getCurrentVehicles());
+$volvo = new Car('red', 4, 'fuel');
+$volvo->setParkBrake(true);
+try {
+   echo $volvo->start();
+} catch (Exception $e) {
+   $volvo->setParkBrake(true);
+} finally {
+   echo "Ma voiture roule comme un donut";
+}
